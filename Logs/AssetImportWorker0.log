@@ -604,3 +604,4 @@ Received Import Request.
 Start importing Assets/Scripts/EnemyServices using Guid(ee183110da2cdd04789b44e1a2392a2e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '01e6fce00e1a088f849b7de8fc07d241') in 0.004977 seconds 
   Import took 0.009962 seconds .
 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
