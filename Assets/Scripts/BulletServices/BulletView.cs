@@ -1,17 +1,18 @@
-﻿using UnityEngine;
+﻿using GlobalServices;
+using UnityEngine;
 
 namespace BulletServices
 {
+    // Script is present on visual instance of bullet.
     [RequireComponent(typeof(Rigidbody))]
     public class BulletView : MonoBehaviour
     {
         private BulletController bulletController;
 
         public ParticleSystem explosionParticles;
-        public AudioSource explosionSound;
+        public AudioSource explosionSound;    
 
-        public LayerMask layerMask;
-
+        // To set bullet controller reference in bullet view.
         public void SetBulletController(BulletController controller)
         {
             bulletController = controller;
@@ -19,8 +20,15 @@ namespace BulletServices
 
         private void Start()
         {
-            Destroy(gameObject, bulletController.bulletModel.maxLifeTime);
+            EventService.Instance.OnGamePaused += bulletController.GamePaused;
+            EventService.Instance.OnGameResumed += bulletController.GameResumed;
         }
+
+        private void OnDestroy()
+        {
+            EventService.Instance.OnGamePaused -= bulletController.GamePaused;
+            EventService.Instance.OnGameResumed -= bulletController.GameResumed;         
+        }    
 
         private void OnTriggerEnter(Collider other)
         {
