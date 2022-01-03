@@ -8,30 +8,24 @@ namespace UIServices
     public class SplashScreen : MonoBehaviour
     {
         // Splash screen image.
-        public Image image;
-
-        async void Start()
+        public void play()
         {
-            // To add certain amount of delay.
-            await new WaitForSeconds(3f);
+            SceneManager.LoadScene("Game");
+        }
 
-            float newAlpha = 1;
-            Color panelColor = image.color;
+        public void credits()
+        {
+            SceneManager.LoadScene("Credits");
+        }
 
-            // Fades out image in particular amount of time.
-            while (newAlpha > 0)
-            {
-                newAlpha -= Time.deltaTime;
-                newAlpha = Mathf.Max(newAlpha, 0f);
+        public void back()
+        {
+            SceneManager.LoadScene("StartScreen");
+        }
 
-                panelColor.a = newAlpha;
-                image.color = panelColor;
-
-                await new WaitForSeconds(0.001f);
-            }
-
-            // Loads next scene after completion of splash screen.
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        public void quit()
+        {
+            Application.Quit();
         }
     }
 }
